@@ -15,7 +15,6 @@ static Obj* allocateObject(size_t size, ObjType type) {
   object->type = type;
   object->next = vm.objects;
   vm.objects = object;
-  string->hash = hash;
   return object;
 }
 
@@ -57,6 +56,8 @@ static ObjString* allocateString(char* chars, int length,
   return string;
 }
 
+static void printFunction(ObjFunction* function);
+
 static uint32_t hashString(const char* key, int length) {
   uint32_t hash = 2166136261u;
   for (int i = 0; i < length; i++) {
@@ -66,7 +67,7 @@ static uint32_t hashString(const char* key, int length) {
   return hash;
 }
 
-static void printObject(Value value) {
+void printObject(Value value) {
   switch (OBJ_TYPE(value)) {
     case OBJ_CLOSURE:
       printFunction(AS_CLOSURE(value)->function);

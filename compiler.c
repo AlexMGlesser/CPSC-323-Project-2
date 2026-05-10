@@ -239,6 +239,12 @@ static void statement();
 static void declaration();
 static ParseRule* getRule(TokenType type);
 static void parsePrecedence(Precedence precedence);
+static uint8_t argumentList();
+static int resolveLocal(Compiler* compiler, Token* name);
+static int resolveUpvalue(Compiler* compiler, Token* name);
+static uint8_t identifierConstant(Token* name);
+static void and_(bool canAssign);
+static void or_(bool canAssign);
 
 static void binary(bool canAssign) {
   TokenType operatorType = parser.previous.type;
@@ -760,7 +766,6 @@ ObjFunction* compile(const char* source) {
   Compiler compiler;
 
   initCompiler(&compiler, TYPE_SCRIPT);
-  compilingChunk = chunk;
 
   parser.hadError = false;
   parser.panicMode = false;

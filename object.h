@@ -1,6 +1,7 @@
 #ifndef clox_object_h
 #define clox_object_h
 
+#include <stdio.h>
 #include "common.h"
 #include "chunk.h"
 #include "value.h"
@@ -74,14 +75,6 @@ ObjString* takeString(char* chars, int length);
 ObjString* copyString(const char* chars, int length);
 ObjUpvalue* newUpvalue(Value* slot);
 void printObject(Value value);
-
-void printObject(Value value) {
-  switch (OBJ_TYPE(value)) {
-    case OBJ_STRING:
-      printf("%s", AS_CSTRING(value));
-      break;
-  }
-}
 
 
 

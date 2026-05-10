@@ -27,11 +27,13 @@ void writeChunk(Chunk* chunk, uint8_t byte, int line) {
     chunk->lines = GROW_ARRAY(int, chunk->lines,
         oldCapacity, chunk->capacity);
   }
+
+  chunk->code[chunk->count] = byte;
+  chunk->lines[chunk->count] = line;
+  chunk->count++;
+}
+
 int addConstant(Chunk* chunk, Value value) {
   writeValueArray(&chunk->constants, value);
   return chunk->constants.count - 1;
-}
-
-  chunk->code[chunk->count] = byte;
-  chunk->count++;
 }

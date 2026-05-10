@@ -130,7 +130,7 @@ static ObjUpvalue* captureUpvalue(Value* local) {
     return upvalue;
   }
   ObjUpvalue* createdUpvalue = newUpvalue(local);
-  reatedUpvalue->next = upvalue;
+  createdUpvalue->next = upvalue;
 
   if (prevUpvalue == NULL) {
     vm.openUpvalues = createdUpvalue;
